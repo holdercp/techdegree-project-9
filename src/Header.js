@@ -1,11 +1,11 @@
 import React from 'react';
 import SearchForm from './SearchForm';
-import MainNav from './MainNav';
+import Nav from './Nav';
 
-const Header = () => (
+const Header = ({ linkNames }) => (
   <header className="header">
     <SearchForm />
-    <MainNav />
+    <Nav linkNames={linkNames} />
   </header>
 );
 
