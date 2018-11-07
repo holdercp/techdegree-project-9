@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { BrowserRouter as Router, Route } from 'react-router-dom';
 import Header from './Header';
 import Gallery from './Gallery';
 
@@ -39,10 +40,15 @@ class App extends Component {
   render() {
     const { topics, imgs } = this.state;
     return (
-      <div className="container">
-        <Header linkNames={topics} />
-        <Gallery imgs={imgs} />
-      </div>
+      <Router>
+        <div className="container">
+          <Header linkNames={topics} />
+          <Route
+            render={({ location, props }) => (location.pathname !== '/search' ? <Gallery {...props} imgs={imgs} /> : '')
+            }
+          />
+        </div>
+      </Router>
     );
   }
 }

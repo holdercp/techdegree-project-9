@@ -1,9 +1,10 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 
 const Nav = ({ linkNames }) => {
   const links = linkNames.map(name => (
     <li key={name}>
-      <a href={`/${name.toLowerCase()}`}>{name}</a>
+      <Link to={`/${name.toLowerCase()}`}>{name}</Link>
     </li>
   ));
 
