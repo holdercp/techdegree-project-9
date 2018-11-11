@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { BrowserRouter as Router, Route } from 'react-router-dom';
+import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 import Axios from 'axios';
 import APIKey from './config';
 import Header from './Header';
@@ -16,9 +16,17 @@ class App extends Component {
     super(props);
     this.state = {
       imgs: [],
-      loading: true,
-      tags: ['Cats', 'Dogs', 'Computers'],
+      searchTerm: 'Ninjas',
+      tags: ['Plane', 'Train', 'Automobile'],
     };
+
+    this.fetchImgs = this.fetchImgs.bind(this);
+    this.handleUpdate = this.handleUpdate.bind(this);
+  }
+
+  componentDidMount() {
+    const { searchTerm } = this.state;
+    this.fetchImgs(searchTerm);
   }
 
   fetchImgs(tag) {
@@ -41,7 +49,6 @@ class App extends Component {
         }));
         this.setState({
           imgs: imgUrls,
-          loading: false,
         });
       })
       .catch((error) => {
@@ -49,19 +56,20 @@ class App extends Component {
       });
   }
 
+  handleUpdate(tag) {
+    this.fetchImgs(tag);
+    this.setState({
+      searchTerm: tag,
+    });
+  }
+
   render() {
-    const { tags, imgs } = this.state;
+    const { tags, imgs, searchTerm } = this.state;
     return (
       <Router>
         <div className="container">
-          <button type="button" onClick={() => this.fetchImgs('cats')}>
-            Click me
-          </button>
-          <Header linkNames={tags} />
-          <Route
-            render={({ location, props }) => (location.pathname !== '/search' ? <Gallery {...props} imgs={imgs} /> : '')
-            }
-          />
+          <Header linkNames={tags} handleSearch={this.handleUpdate} />
+          <Gallery imgs={imgs} searchTerm={searchTerm} />
         </div>
       </Router>
     );

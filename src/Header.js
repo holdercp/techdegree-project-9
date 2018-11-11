@@ -2,9 +2,9 @@ import React from 'react';
 import SearchForm from './SearchForm';
 import Nav from './Nav';
 
-const Header = ({ linkNames }) => (
+const Header = ({ linkNames, handleSearch }) => (
   <header className="header">
-    <SearchForm />
+    <SearchForm handleSearch={handleSearch} />
     <Nav linkNames={linkNames} />
   </header>
 );

@@ -1,13 +1,14 @@
 import React, { Component } from 'react';
 
 class SearchForm extends Component {
-  constructor(props) {
+  constructor({ props }) {
     super(props);
     this.state = {
       value: '',
     };
 
     this.handleChange = this.handleChange.bind(this);
+    this.handleSubmit = this.handleSubmit.bind(this);
   }
 
   handleChange(event) {
@@ -16,8 +17,16 @@ class SearchForm extends Component {
     });
   }
 
+  handleSubmit(event) {
+    const { value } = this.state;
+    const { handleSearch } = this.props;
+    event.preventDefault();
+    handleSearch(value);
+  }
+
   render() {
     const { value } = this.state;
+
     return (
       <form className="search-form">
         <label htmlFor="search">Search</label>
@@ -29,7 +38,14 @@ class SearchForm extends Component {
           value={value}
           onChange={this.handleChange}
         />
-        <button type="submit">Search</button>
+        <button
+          type="submit"
+          onClick={(event) => {
+            this.handleSubmit(event);
+          }}
+        >
+          Search
+        </button>
       </form>
     );
   }
