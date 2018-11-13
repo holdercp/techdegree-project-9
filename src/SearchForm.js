@@ -1,10 +1,12 @@
 import React, { Component } from 'react';
+import { Redirect } from 'react-router-dom';
 
 class SearchForm extends Component {
   constructor({ props }) {
     super(props);
     this.state = {
       value: '',
+      searched: false,
     };
 
     this.handleChange = this.handleChange.bind(this);
@@ -21,11 +23,17 @@ class SearchForm extends Component {
     const { value } = this.state;
     const { handleSearch } = this.props;
     event.preventDefault();
+    this.setState({ searched: true });
     handleSearch(value);
   }
 
   render() {
-    const { value } = this.state;
+    const { value, searched } = this.state;
+
+    if (searched) {
+      this.setState({ searched: false });
+      return <Redirect push to={`/search/${value}`} />;
+    }
 
     return (
       <form className="search-form">

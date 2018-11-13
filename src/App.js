@@ -15,7 +15,10 @@ class App extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      imgs: [],
+      searchResults: [],
+      planeResults: [],
+      trainResults: [],
+      automobileResults: [],
       searchTerm: 'Ninjas',
       tags: ['Plane', 'Train', 'Automobile'],
     };
@@ -25,11 +28,12 @@ class App extends Component {
   }
 
   componentDidMount() {
-    const { searchTerm } = this.state;
-    this.fetchImgs(searchTerm);
+    this.fetchImgs('plane', 'planeResults');
+    this.fetchImgs('train', 'trainResults');
+    this.fetchImgs('automobile', 'automobileResults');
   }
 
-  fetchImgs(tag) {
+  fetchImgs(tag, stateLocation = 'searchResults') {
     Axios.get('https://api.flickr.com/services/rest/', {
       params: {
         method: 'flickr.photos.search',
@@ -48,7 +52,7 @@ class App extends Component {
           title: img.title,
         }));
         this.setState({
-          imgs: imgUrls,
+          [stateLocation]: imgUrls,
         });
       })
       .catch((error) => {
@@ -64,12 +68,37 @@ class App extends Component {
   }
 
   render() {
-    const { tags, imgs, searchTerm } = this.state;
+    const {
+      tags,
+      searchTerm,
+      searchResults,
+      planeResults,
+      trainResults,
+      automobileResults,
+    } = this.state;
+
     return (
       <Router>
         <div className="container">
           <Header linkNames={tags} handleSearch={this.handleUpdate} />
-          <Gallery imgs={imgs} searchTerm={searchTerm} />
+          <Switch>
+            <Route
+              path="/plane"
+              render={props => <Gallery {...props} imgs={planeResults} tag="Plane" />}
+            />
+            <Route
+              path="/train"
+              render={props => <Gallery {...props} imgs={trainResults} tag="Train" />}
+            />
+            <Route
+              path="/automobile"
+              render={props => <Gallery {...props} imgs={automobileResults} tag="Automobile" />}
+            />
+            <Route
+              path="/search"
+              render={props => <Gallery {...props} imgs={searchResults} tag={searchTerm} />}
+            />
+          </Switch>
         </div>
       </Router>
     );
