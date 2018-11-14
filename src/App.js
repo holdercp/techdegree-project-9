@@ -16,11 +16,11 @@ class App extends Component {
     super(props);
     this.state = {
       searchResults: [],
-      planeResults: [],
-      trainResults: [],
-      automobileResults: [],
+      planesResults: [],
+      trainsResults: [],
+      automobilesResults: [],
       searchTerm: 'Ninjas',
-      tags: ['Plane', 'Train', 'Automobile'],
+      tags: ['Planes', 'Trains', 'Automobiles'],
     };
 
     this.fetchImgs = this.fetchImgs.bind(this);
@@ -28,9 +28,9 @@ class App extends Component {
   }
 
   componentDidMount() {
-    this.fetchImgs('plane', 'planeResults');
-    this.fetchImgs('train', 'trainResults');
-    this.fetchImgs('automobile', 'automobileResults');
+    this.fetchImgs('planes', 'planesResults');
+    this.fetchImgs('trains', 'trainsResults');
+    this.fetchImgs('automobiles', 'automobilesResults');
   }
 
   fetchImgs(tag, stateLocation = 'searchResults') {
@@ -72,9 +72,9 @@ class App extends Component {
       tags,
       searchTerm,
       searchResults,
-      planeResults,
-      trainResults,
-      automobileResults,
+      planesResults,
+      trainsResults,
+      automobilesResults,
     } = this.state;
 
     return (
@@ -83,16 +83,16 @@ class App extends Component {
           <Header linkNames={tags} handleSearch={this.handleUpdate} />
           <Switch>
             <Route
-              path="/plane"
-              render={props => <Gallery {...props} imgs={planeResults} tag="Plane" />}
+              path="/planes"
+              render={props => <Gallery {...props} imgs={planesResults} tag="Planes" />}
             />
             <Route
-              path="/train"
-              render={props => <Gallery {...props} imgs={trainResults} tag="Train" />}
+              path="/trains"
+              render={props => <Gallery {...props} imgs={trainsResults} tag="Trains" />}
             />
             <Route
-              path="/automobile"
-              render={props => <Gallery {...props} imgs={automobileResults} tag="Automobile" />}
+              path="/automobiles"
+              render={props => <Gallery {...props} imgs={automobilesResults} tag="Automobiles" />}
             />
             <Route
               path="/search"
