@@ -1,14 +1,14 @@
 import React from 'react';
 import GalleryItem from './GalleryItem';
 
-const Gallery = ({ imgs, tag }) => {
+const Gallery = ({ imgs, heading }) => {
   let content;
   let galleryListItems;
-  let heading = tag;
+  let headingContent = heading;
   const empty = imgs.length === 0;
 
   if (empty) {
-    heading = `No results for ${tag} :(`;
+    headingContent = `No results for ${heading} :(`;
     content = <h4>Try a new search or click one of the topics above.</h4>;
   } else {
     galleryListItems = imgs.map(img => <GalleryItem img={img} key={img.id} />);
@@ -17,7 +17,7 @@ const Gallery = ({ imgs, tag }) => {
 
   return (
     <section>
-      <h2>{heading}</h2>
+      <h2>{headingContent}</h2>
       <div className="photo-container">{content}</div>
     </section>
   );

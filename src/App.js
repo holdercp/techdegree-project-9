@@ -19,7 +19,7 @@ class App extends Component {
       planesResults: [],
       trainsResults: [],
       automobilesResults: [],
-      searchTerm: 'Ninjas',
+      searchTerm: '',
       tags: ['Planes', 'Trains', 'Automobiles'],
     };
 
@@ -80,23 +80,37 @@ class App extends Component {
     return (
       <Router>
         <div className="container">
-          <Header linkNames={tags} handleSearch={this.handleUpdate} />
+          <Route
+            render={props => (
+              <Header
+                {...props}
+                linkNames={tags}
+                handleSearch={this.handleUpdate}
+                term={searchTerm}
+              />
+            )}
+          />
           <Switch>
             <Route
+              exact
               path="/planes"
-              render={props => <Gallery {...props} imgs={planesResults} tag="Planes" />}
+              render={props => <Gallery {...props} imgs={planesResults} heading="Planes" />}
             />
             <Route
+              exact
               path="/trains"
-              render={props => <Gallery {...props} imgs={trainsResults} tag="Trains" />}
+              render={props => <Gallery {...props} imgs={trainsResults} heading="Trains" />}
             />
             <Route
+              exact
               path="/automobiles"
-              render={props => <Gallery {...props} imgs={automobilesResults} tag="Automobiles" />}
+              render={props => (
+                <Gallery {...props} imgs={automobilesResults} heading="Automobiles" />
+              )}
             />
             <Route
               path="/search"
-              render={props => <Gallery {...props} imgs={searchResults} tag={searchTerm} />}
+              render={props => <Gallery {...props} imgs={searchResults} heading={searchTerm} />}
             />
           </Switch>
         </div>

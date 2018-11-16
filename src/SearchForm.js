@@ -13,6 +13,28 @@ class SearchForm extends Component {
     this.handleSubmit = this.handleSubmit.bind(this);
   }
 
+  componentDidMount() {
+    const { isSearch, handleSearch, searchPath } = this.props;
+    if (isSearch) {
+      handleSearch(searchPath);
+    }
+  }
+
+  componentDidUpdate(prevProps) {
+    const { searchPath, handleSearch } = this.props;
+    if (searchPath && prevProps.searchPath !== searchPath) {
+      handleSearch(searchPath);
+    }
+  }
+
+  static getDerivedStateFromProps(props) {
+    const { term, searchPath } = props;
+    if (searchPath === term) {
+      return { searched: false };
+    }
+    return null;
+  }
+
   handleChange(event) {
     this.setState({
       value: event.target.value,
@@ -31,7 +53,6 @@ class SearchForm extends Component {
     const { value, searched } = this.state;
 
     if (searched) {
-      this.setState({ searched: false });
       return <Redirect push to={`/search/${value}`} />;
     }
 
