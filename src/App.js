@@ -4,6 +4,7 @@ import Axios from 'axios';
 import APIKey from './config';
 import Header from './Header';
 import Gallery from './Gallery';
+import NotFound from './NotFound';
 
 class App extends Component {
   static constructImgUrl({
@@ -126,9 +127,7 @@ class App extends Component {
             <Route
               exact
               path="/search"
-              render={props => (
-                <Gallery {...props} imgs={searchResults} heading={searchTerm} isLoading={loading} />
-              )}
+              render={() => <h4>Try a custom search or click one of the topics above.</h4>}
             />
             <Route
               exact
@@ -137,6 +136,8 @@ class App extends Component {
                 <Gallery {...props} imgs={searchResults} heading={searchTerm} isLoading={loading} />
               )}
             />
+
+            <Route component={NotFound} />
           </Switch>
         </div>
       </Router>
