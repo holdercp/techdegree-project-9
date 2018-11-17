@@ -1,7 +1,8 @@
 import React from 'react';
 import GalleryItem from './GalleryItem';
+import Loader from './Loader';
 
-const Gallery = ({ imgs, heading }) => {
+const Gallery = ({ imgs, heading, isLoading }) => {
   let content;
   let galleryListItems;
   let headingContent = heading;
@@ -15,6 +16,9 @@ const Gallery = ({ imgs, heading }) => {
     content = <ul>{galleryListItems}</ul>;
   }
 
+  if (isLoading) {
+    return <Loader />;
+  }
   return (
     <section>
       <h2>{headingContent}</h2>

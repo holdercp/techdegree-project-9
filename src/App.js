@@ -21,6 +21,7 @@ class App extends Component {
       automobilesResults: [],
       searchTerm: '',
       tags: ['Planes', 'Trains', 'Automobiles'],
+      loading: false,
     };
 
     this.fetchImgs = this.fetchImgs.bind(this);
@@ -52,6 +53,7 @@ class App extends Component {
           title: img.title,
         }));
         this.setState({
+          loading: false,
           [stateLocation]: imgUrls,
         });
       })
@@ -61,6 +63,9 @@ class App extends Component {
   }
 
   handleUpdate(tag) {
+    this.setState({
+      loading: true,
+    });
     this.fetchImgs(tag);
     this.setState({
       searchTerm: tag,
@@ -75,6 +80,7 @@ class App extends Component {
       planesResults,
       trainsResults,
       automobilesResults,
+      loading,
     } = this.state;
 
     return (
@@ -94,29 +100,42 @@ class App extends Component {
             <Route
               exact
               path="/planes"
-              render={props => <Gallery {...props} imgs={planesResults} heading="Planes" />}
+              render={props => (
+                <Gallery {...props} imgs={planesResults} heading="Planes" isLoading={loading} />
+              )}
             />
             <Route
               exact
               path="/trains"
-              render={props => <Gallery {...props} imgs={trainsResults} heading="Trains" />}
+              render={props => (
+                <Gallery {...props} imgs={trainsResults} heading="Trains" isLoading={loading} />
+              )}
             />
             <Route
               exact
               path="/automobiles"
               render={props => (
-                <Gallery {...props} imgs={automobilesResults} heading="Automobiles" />
+                <Gallery
+                  {...props}
+                  imgs={automobilesResults}
+                  heading="Automobiles"
+                  isLoading={loading}
+                />
               )}
             />
             <Route
               exact
               path="/search"
-              render={props => <Gallery {...props} imgs={searchResults} heading={searchTerm} />}
+              render={props => (
+                <Gallery {...props} imgs={searchResults} heading={searchTerm} isLoading={loading} />
+              )}
             />
             <Route
               exact
               path="/search/:term"
-              render={props => <Gallery {...props} imgs={searchResults} heading={searchTerm} />}
+              render={props => (
+                <Gallery {...props} imgs={searchResults} heading={searchTerm} isLoading={loading} />
+              )}
             />
           </Switch>
         </div>
