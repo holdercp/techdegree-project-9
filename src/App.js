@@ -109,7 +109,13 @@ class App extends Component {
               )}
             />
             <Route
+              exact
               path="/search"
+              render={props => <Gallery {...props} imgs={searchResults} heading={searchTerm} />}
+            />
+            <Route
+              exact
+              path="/search/:term"
               render={props => <Gallery {...props} imgs={searchResults} heading={searchTerm} />}
             />
           </Switch>
