@@ -64,7 +64,7 @@ input:focus, input:valid {
 }
 
 input:focus ~ label, input:valid ~ label     {
-  top: 2px;
+  top: 0;
   left: .75rem;
   font-size: .875rem;
   color:#1eb980;
