@@ -14,6 +14,7 @@ const Header = ({
     handleSearch,
     term,
     isSearch,
+    searchPath: '',
   };
 
   // If we're on a search route, grab the term and add it to props

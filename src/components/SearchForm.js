@@ -18,7 +18,7 @@ class SearchForm extends Component {
   // If we load on a search route, then fetch imgs realted to the term in the url
   componentDidMount() {
     const { isSearch, handleSearch, searchPath } = this.props;
-    if (isSearch) {
+    if (isSearch && searchPath) {
       handleSearch(searchPath);
     }
   }
@@ -51,11 +51,13 @@ class SearchForm extends Component {
     const { value } = this.state;
     const { handleSearch } = this.props;
 
-    event.preventDefault();
-    event.stopPropogation();
+    if (value) {
+      event.preventDefault();
+      event.stopPropagation();
 
-    this.setState({ searched: true });
-    handleSearch(value);
+      this.setState({ searched: true });
+      handleSearch(value);
+    }
   }
 
   render() {
@@ -85,14 +87,10 @@ class SearchForm extends Component {
   }
 }
 
-SearchForm.defaultProps = {
-  searchPath: 'treehouse',
-};
-
 SearchForm.propTypes = {
   isSearch: PropTypes.bool.isRequired,
   handleSearch: PropTypes.func.isRequired,
-  searchPath: PropTypes.string,
+  searchPath: PropTypes.string.isRequired,
 };
 
 export default SearchForm;
