@@ -51,11 +51,11 @@ class SearchForm extends Component {
     const { value } = this.state;
     const { handleSearch } = this.props;
 
-    if (value) {
-      event.preventDefault();
-      this.setState({ searched: true });
-      handleSearch(value);
-    }
+    event.preventDefault();
+    event.stopPropogation();
+
+    this.setState({ searched: true });
+    handleSearch(value);
   }
 
   render() {
@@ -79,11 +79,7 @@ class SearchForm extends Component {
           onChange={this.handleChange}
         />
         <label htmlFor="search">Search</label>
-        <SearchButton
-          handleClick={(event) => {
-            this.handleSubmit(event);
-          }}
-        />
+        <SearchButton handleClick={this.handleSubmit} />
       </form>
     );
   }
