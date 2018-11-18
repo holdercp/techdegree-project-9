@@ -13,6 +13,7 @@ class SearchForm extends Component {
     this.handleSubmit = this.handleSubmit.bind(this);
   }
 
+  // If we load on a search route, then fetch imgs realted to the term in the url
   componentDidMount() {
     const { isSearch, handleSearch, searchPath } = this.props;
     if (isSearch) {
@@ -20,6 +21,7 @@ class SearchForm extends Component {
     }
   }
 
+  // If we are on a search route, make sure we get fresh data from the API
   componentDidUpdate(prevProps) {
     const { searchPath, handleSearch } = this.props;
     if (searchPath && prevProps.searchPath !== searchPath) {
@@ -27,6 +29,7 @@ class SearchForm extends Component {
     }
   }
 
+  // This resets the "searched" state after a redirect to prevent infinite redirect loops
   static getDerivedStateFromProps(props) {
     const { term, searchPath } = props;
     if (searchPath === term) {
@@ -41,6 +44,7 @@ class SearchForm extends Component {
     });
   }
 
+  // Invokes the method that fetches new images; passed down as a prop
   handleSubmit(event) {
     const { value } = this.state;
     const { handleSearch } = this.props;
@@ -52,6 +56,8 @@ class SearchForm extends Component {
   render() {
     const { value, searched } = this.state;
 
+    // If we submitted the search form we need to redirect to the search route
+    // and display the term in the url
     if (searched) {
       return <Redirect push to={`/search/${value}`} />;
     }

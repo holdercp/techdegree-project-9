@@ -2,11 +2,12 @@ import React, { Component } from 'react';
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 import Axios from 'axios';
 import APIKey from './config';
-import Header from './Header';
-import Gallery from './Gallery';
-import NotFound from './NotFound';
+import Header from './components/Header';
+import Gallery from './components/Gallery';
+import NotFound from './components/NotFound';
 
 class App extends Component {
+  // Format the url for the Flicker API
   static constructImgUrl({
     farm, server, id, secret,
   }, size = 'm') {
@@ -29,12 +30,14 @@ class App extends Component {
     this.handleUpdate = this.handleUpdate.bind(this);
   }
 
+  // Load all the imgs for the defined routes on initial load
   componentDidMount() {
     this.fetchImgs('planes', 'planesResults');
     this.fetchImgs('trains', 'trainsResults');
     this.fetchImgs('automobiles', 'automobilesResults');
   }
 
+  // Request the API and construct a tidy obj to be passed down to other components
   fetchImgs(tag, stateLocation = 'searchResults') {
     Axios.get('https://api.flickr.com/services/rest/', {
       params: {

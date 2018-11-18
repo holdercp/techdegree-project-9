@@ -8,6 +8,7 @@ const Header = ({
   // Check to see if we are on a search route and add it to props (wish I could just use the match param but this header has to render on every route)
   const isSearch = location.pathname.slice(1, 8) === 'search/';
 
+  // Construct the props obj we will pass to the SearchForm since the searchPath prop is conditional
   const searchProps = {
     handleSearch,
     term,
