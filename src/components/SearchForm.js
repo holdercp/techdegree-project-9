@@ -49,9 +49,12 @@ class SearchForm extends Component {
   handleSubmit(event) {
     const { value } = this.state;
     const { handleSearch } = this.props;
-    event.preventDefault();
-    this.setState({ searched: true });
-    handleSearch(value);
+
+    if (value) {
+      event.preventDefault();
+      this.setState({ searched: true });
+      handleSearch(value);
+    }
   }
 
   render() {
