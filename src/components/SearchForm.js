@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { Redirect } from 'react-router-dom';
+import SearchButton from './SearchButton';
 
 class SearchForm extends Component {
   constructor({ props }) {
@@ -64,23 +65,20 @@ class SearchForm extends Component {
 
     return (
       <form className="search-form">
-        <label htmlFor="search">Search</label>
         <input
           type="text"
           name="search"
           id="search"
-          placeholder="Ninjas"
+          required
           value={value}
           onChange={this.handleChange}
         />
-        <button
-          type="submit"
-          onClick={(event) => {
+        <label htmlFor="search">Search</label>
+        <SearchButton
+          handleClick={(event) => {
             this.handleSubmit(event);
           }}
-        >
-          Search
-        </button>
+        />
       </form>
     );
   }
