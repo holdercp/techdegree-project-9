@@ -70,6 +70,7 @@ class SearchForm extends Component {
           name="search"
           id="search"
           required
+          autoComplete="off"
           value={value}
           onChange={this.handleChange}
         />

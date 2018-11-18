@@ -10,8 +10,8 @@ class App extends Component {
   // Format the url for the Flicker API
   static constructImgUrl({
     farm, server, id, secret,
-  }, size = 'm') {
-    return `https://farm${farm}.staticflickr.com/${server}/${id}_${secret}_${size}.jpg`;
+  }) {
+    return `https://farm${farm}.staticflickr.com/${server}/${id}_${secret}.jpg`;
   }
 
   constructor(props) {
