@@ -1,10 +1,12 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
+import { NavLink } from 'react-router-dom';
 
 const Nav = ({ linkNames }) => {
   const links = linkNames.map(name => (
     <li key={name}>
-      <Link to={`/${name.toLowerCase()}`}>{name}</Link>
+      <NavLink to={`/${name.toLowerCase()}`} activeClassName="active">
+        {name}
+      </NavLink>
     </li>
   ));
 
