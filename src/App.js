@@ -130,7 +130,7 @@ class App extends Component {
             <Route
               exact
               path="/search"
-              render={() => <h4>Try a custom search or click one of the topics above.</h4>}
+              render={() => <h2>Try a custom search or click one of the topics above.</h2>}
             />
             <Route
               exact
