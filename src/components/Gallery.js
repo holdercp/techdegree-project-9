@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import GalleryItem from './GalleryItem';
 import Loader from './Loader';
 
@@ -30,6 +31,12 @@ const Gallery = ({ imgs, heading, isLoading }) => {
       <p>Try a new search or click one of the topics above.</p>
     </section>
   );
+};
+
+Gallery.propTypes = {
+  imgs: PropTypes.arrayOf(PropTypes.object).isRequired,
+  heading: PropTypes.string.isRequired,
+  isLoading: PropTypes.bool.isRequired,
 };
 
 export default Gallery;

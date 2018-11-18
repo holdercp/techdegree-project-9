@@ -1,5 +1,6 @@
 import React from 'react';
 import { NavLink } from 'react-router-dom';
+import PropTypes from 'prop-types';
 
 const Nav = ({ linkNames }) => {
   const links = linkNames.map(name => (
@@ -15,6 +16,10 @@ const Nav = ({ linkNames }) => {
       <ul>{links}</ul>
     </nav>
   );
+};
+
+Nav.propTypes = {
+  linkNames: PropTypes.arrayOf(PropTypes.string).isRequired,
 };
 
 export default Nav;

@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 
 const SearchButton = ({ handleClick }) => (
   <button type="submit" onClick={handleClick}>
@@ -11,5 +12,9 @@ const SearchButton = ({ handleClick }) => (
     </svg>
   </button>
 );
+
+SearchButton.propTypes = {
+  handleClick: PropTypes.func.isRequired,
+};
 
 export default SearchButton;

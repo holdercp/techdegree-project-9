@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { Redirect } from 'react-router-dom';
+import PropTypes from 'prop-types';
 import SearchButton from './SearchButton';
 
 class SearchForm extends Component {
@@ -87,5 +88,15 @@ class SearchForm extends Component {
     );
   }
 }
+
+SearchForm.defaultProps = {
+  searchPath: 'treehouse',
+};
+
+SearchForm.propTypes = {
+  isSearch: PropTypes.bool.isRequired,
+  handleSearch: PropTypes.func.isRequired,
+  searchPath: PropTypes.string,
+};
 
 export default SearchForm;
