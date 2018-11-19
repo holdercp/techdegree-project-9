@@ -13,6 +13,16 @@ Then you will:
 - Add to the supplied CSS to personalize the project.
 
 ---
+## Getting Started
+- Run `npm install` to install the project's dependencies. You can also run `npm install --only=production` if you don't want to install dev dependecies.
+- You will need a Flickr API key, which you can apply for [here](https://www.flickr.com/services/apps/create/apply/).
+- Create a `config.js` file in the `src/` directory. This file should export your Flikr API key, which will be imported by `app.js`. It will look something like this:
+```javascript
+const apiKey = '[your api key]';
+export default apiKey;
+```
+- Run `npm start` to start the dev server.
+---
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
