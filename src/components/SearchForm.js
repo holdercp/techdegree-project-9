@@ -55,18 +55,19 @@ class SearchForm extends Component {
       event.preventDefault();
       event.stopPropagation();
 
-      this.setState({ searched: true });
       handleSearch(value);
+      this.setState({ searched: true, value: '' });
     }
   }
 
   render() {
     const { value, searched } = this.state;
+    const { term } = this.props;
 
     // If we submitted the search form we need to redirect to the search route
     // and display the term in the url
     if (searched) {
-      return <Redirect push to={`/search/${value}`} />;
+      return <Redirect push to={`/search/${term}`} />;
     }
 
     return (
@@ -88,6 +89,7 @@ class SearchForm extends Component {
 }
 
 SearchForm.propTypes = {
+  term: PropTypes.string.isRequired,
   isSearch: PropTypes.bool.isRequired,
   handleSearch: PropTypes.func.isRequired,
   searchPath: PropTypes.string.isRequired,

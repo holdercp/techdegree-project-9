@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 import Axios from 'axios';
+import Redirect from 'react-router-dom/Redirect';
 import APIKey from './config';
 import Header from './components/Header';
 import Gallery from './components/Gallery';
@@ -139,6 +140,8 @@ class App extends Component {
                 <Gallery {...props} imgs={searchResults} heading={searchTerm} isLoading={loading} />
               )}
             />
+
+            <Route exact path="/" render={() => <Redirect push to="/planes" />} />
 
             <Route component={NotFound} />
           </Switch>
